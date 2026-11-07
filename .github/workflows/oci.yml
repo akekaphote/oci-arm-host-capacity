@@ -49,4 +49,15 @@ jobs:
           echo "MEMORY_IN_GBS=${{ secrets.MEMORY_IN_GBS }}" >> .env
 
       - name: Run OCI Host Creator Script
-        run: php index.php
+        run: |
+          for i in {1..30}; do
+            echo "Attempt $i..."
+            OUTPUT=$(php index.php)
+            echo "$OUTPUT"
+            if [[ "$OUTPUT" != *"Out of host capacity"* ]]; then
+              echo "Host created or distinct error encountered! Exiting loop."
+              break
+            fi
+            sleep 10
+          done
+        
