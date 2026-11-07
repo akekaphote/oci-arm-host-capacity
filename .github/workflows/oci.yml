@@ -27,7 +27,13 @@ jobs:
 
       - name: Create Private Key file
         run: |
-          php -r 'file_put_contents("akekaphote@gmail.com-2026-11-06T12_26_12.239Z.pem", getenv("OCI_PK"));'
+          php -r '
+            $key = trim(getenv("OCI_PK"));
+            // แปลงอักขระ \n แบบข้อความให้เป็นขึ้นบรรทัดใหม่จริง
+            $key = str_replace("\\n", "\n", $key);
+            // บันทึกลงไฟล์คีย์
+            file_put_contents("akekaphote@gmail.com-2026-11-06T12_26_12.239Z.pem", $key);
+          '
         env:
           OCI_PK: ${{ secrets.OCI_PRIVATE_KEY }}
 
