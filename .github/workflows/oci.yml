@@ -2,8 +2,8 @@ name: OCI ARM Auto Creator
 
 on:
   schedule:
-    - cron: '*/10 * * * *' # สั่งรันอัตโนมัติทุกๆ 10 นาที
-  workflow_dispatch: # อนุญาตให้กดปุ่มรันด้วยมือจากหน้าเว็บได้ตลอดเวลา
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
 
 jobs:
   run-script:
@@ -19,13 +19,12 @@ jobs:
 
       - name: Install Composer dependencies
         run: |
-          pwd
-          ls -la
-          if [ -f "./composer.json" ]; then
+          if [ -f "composer.json" ]; then
             composer install --no-dev --prefer-dist
           else
-            echo "Skipping composer install as composer.json is not in root."
+            echo "composer.json not found, skipping."
           fi
+
       - name: Create Private Key file
         run: echo "${{ secrets.OCI_PRIVATE_KEY }}" > key.pem
 
