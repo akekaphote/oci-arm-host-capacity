@@ -19,12 +19,13 @@ jobs:
 
       - name: Install Composer dependencies
         run: |
-          if [ -f composer.json ]; then
+          pwd
+          ls -la
+          if [ -f "./composer.json" ]; then
             composer install --no-dev --prefer-dist
           else
-            echo "No composer.json found, skipping composer install."
+            echo "Skipping composer install as composer.json is not in root."
           fi
-
       - name: Create Private Key file
         run: echo "${{ secrets.OCI_PRIVATE_KEY }}" > key.pem
 
