@@ -26,7 +26,7 @@ jobs:
           fi
 
       - name: Create Private Key file
-        run: echo "${{ secrets.OCI_PRIVATE_KEY }}" > key.pem
+        run: echo "${{ secrets.OCI_PRIVATE_KEY }}" > akekaphote@gmail.com-2026-11-06T12_26_12.239Z.pem
 
       - name: Create .env configuration
         run: |
@@ -34,7 +34,7 @@ jobs:
           echo "OCI_USER_OCID=${{ secrets.OCI_USER_OCID }}" >> .env
           echo "OCI_TENANCY_OCID=${{ secrets.OCI_TENANCY_OCID }}" >> .env
           echo "OCI_FINGERPRINT=${{ secrets.OCI_FINGERPRINT }}" >> .env
-          echo "OCI_PRIVATE_KEY_PATH=key.pem" >> .env
+          echo "OCI_PRIVATE_KEY_PATH=akekaphote@gmail.com-2026-11-06T12_26_12.239Z.pem" >> .env
           echo "OCI_AVAILABILITY_DOMAIN=${{ secrets.OCI_AVAILABILITY_DOMAIN }}" >> .env
           echo "OCI_SUBNET_ID=${{ secrets.OCI_SUBNET_ID }}" >> .env
           echo "OCI_IMAGE_ID=${{ secrets.OCI_IMAGE_ID }}" >> .env
