@@ -50,18 +50,16 @@ jobs:
 
       - name: Run OCI Host Creator Script
         run: |
-          # วนลูป 60 ครั้ง (ครั้งละ 15 วินาที รวมเวลาทำงานประมาณ 15 นาทีต่อรอบ)
           for i in {1..60}; do
             echo "Attempt $i..."
             OUTPUT=$(php index.php 2>&1)
             echo "$OUTPUT"
             
-            # ตรวจสอบว่าสร้างสำเร็จจริง (ไม่มีคำว่า Error, Capacity และ timed out)
-            if [[ "$OUTPUT" != *"Error"* ]] && [[ "$OUTPUT" != *"Capacity"* ]] && [[ "$OUTPUT" != *"timed out"* ]]; then
+            # ตรวจสอบว่าใน Output ไม่มีคำแจ้งเตือนปัญหาใดๆ เลย ถึงจะถือว่าสำเร็จจริง
+            if [[ "$OUTPUT" != *"Error"* ]] && [[ "$OUTPUT" != *"Capacity"* ]] && [[ "$OUTPUT" != *"TooManyRequests"* ]] && [[ "$OUTPUT" != *"timed out"* ]]; then
               echo "Success! Host created."
               break
             fi
             
             sleep 15
           done
-        
