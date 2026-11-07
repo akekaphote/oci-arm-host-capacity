@@ -27,9 +27,9 @@ jobs:
 
       - name: Create Private Key file
         run: |
-          cat << 'EOF' > key.pem
+          cat << 'EOF' > "akekaphote@gmail.com-2026-11-06T12_26_12.239Z.pem"
           ${{ secrets.OCI_PRIVATE_KEY }}
-          EOF" > akekaphote@gmail.com-2026-11-06T12_26_12.239Z.pem
+          EOF
 
       - name: Create .env configuration
         run: |
