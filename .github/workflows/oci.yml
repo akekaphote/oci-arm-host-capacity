@@ -50,14 +50,18 @@ jobs:
 
       - name: Run OCI Host Creator Script
         run: |
-          for i in {1..30}; do
+          for i in {1..15}; do
             echo "Attempt $i..."
             OUTPUT=$(php index.php)
             echo "$OUTPUT"
-            if [[ "$OUTPUT" != *"Out of host capacity"* ]]; then
-              echo "Host created or distinct error encountered! Exiting loop."
+            
+            # ถ้า Response ไม่มีคำว่า Error หรือ Out of capacity ถือว่าสำเร็จ
+            if [[ "$OUTPUT" != *"Error"* ]] && [[ "$OUTPUT" != *"Capacity"* ]]; then
+              echo "Success! Host created."
               break
             fi
-            sleep 10
+            
+            # หน่วงเวลา 15 วินาทีก่อนยิงรอบถัดไปเพื่อป้องกัน TooManyRequests
+            sleep 15
           done
         
