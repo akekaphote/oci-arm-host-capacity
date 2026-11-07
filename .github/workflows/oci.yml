@@ -1,4 +1,9 @@
+
 name: OCI ARM Auto Creator
+
+concurrency:
+  group: oci-arm-creator
+  cancel-in-progress: true
 
 on:
   schedule:
