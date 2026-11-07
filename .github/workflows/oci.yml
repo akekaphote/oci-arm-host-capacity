@@ -27,16 +27,9 @@ jobs:
 
       - name: Create Private Key file
         run: |
-          php -r '
-            $key = trim(getenv("OCI_PK"));
-            // แปลงตัวอักษร \n แบบข้อความให้เป็นขึ้นบรรทัดใหม่จริงๆ
-            $key = str_replace(["\\n", "\r\n"], ["\n", "\n"], $key);
-            // บันทึกลงไฟล์
-            file_put_contents("akekaphote@gmail.com-2026-11-06T12_26_12.239Z.pem", $key);
-            echo "Private Key created successfully. Length: " . strlen($key) . " bytes.\n";
-          '
-        env:
-          OCI_PK: ${{ secrets.OCI_PRIVATE_KEY }}
+          cat << 'EOF' > "akekaphote@gmail.com-2026-11-06T12_26_12.239Z.pem"
+          ${{ secrets.OCI_PRIVATE_KEY }}
+          EOF
           
       - name: Create .env configuration
         run: |
