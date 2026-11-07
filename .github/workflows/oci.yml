@@ -27,9 +27,13 @@ jobs:
 
       - name: Create Private Key file
         run: |
-          cat << 'EOF' > "akekaphote@gmail.com-2026-11-06T12_26_12.239Z.pem"
-          ${{ secrets.OCI_PRIVATE_KEY }}
-          EOF
+          php -r '
+            $b64 = trim(getenv("OCI_PK"));
+            $key = base64_decode($b64);
+            file_put_contents("akekaphote@gmail.com-2026-11-06T12_26_12.239Z.pem", $key);
+          '
+        env:
+          OCI_PK: ${{ secrets.OCI_PRIVATE_KEY }}
           
       - name: Create .env configuration
         run: |
