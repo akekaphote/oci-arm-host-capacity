@@ -28,7 +28,7 @@ jobs:
       - name: Create Private Key file
         run: echo "${{ secrets.OCI_PRIVATE_KEY }}" > key.pem
 
-     - name: Create .env configuration
+      - name: Create .env configuration
         run: |
           echo "OCI_REGION=${{ secrets.OCI_REGION }}" > .env
           echo "OCI_USER_OCID=${{ secrets.OCI_USER_OCID }}" >> .env
