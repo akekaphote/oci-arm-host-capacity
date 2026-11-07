@@ -18,7 +18,7 @@ jobs:
           php-version: '8.1'
 
       - name: Install Composer dependencies
-        run: composer install --no-dev --prefer-dist
+        run: composer install --no-dev --prefer-dist --working-dir=.
 
       - name: Create Private Key file
         run: echo "${{ secrets.OCI_PRIVATE_KEY }}" > key.pem
